@@ -13,7 +13,7 @@ const CodeEditor = () => {
                 defaultLanguage="javascript"  // Linguagem de programação padrão para o editor (JavaScript neste caso).
                 defaultValue="// some comment"  // Valor inicial do conteúdo do editor.
                 value={value}  // Propriedade 'value' do editor, que é controlada pelo estado 'value'.
-                onChange={(value) => setValue(value)}  // Função de callback chamada sempre que o conteúdo do editor é alterado, atualizando o estado 'value'.
+                onChange={(value) => setValue(value)}  // Função de callback chamada sempre que o conteúdo do editor é alterado, atualizando o estado 'value'
             />
         </Box>
     )
