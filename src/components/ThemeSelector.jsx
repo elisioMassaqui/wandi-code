@@ -12,7 +12,7 @@ const ThemeSelector = ({ onSelectTheme, currentTheme }) => {
 
   return (
     <Box>
-      <Text mb={2} fontSize="lg" fontWeight="bold" color="cyan.200">
+      <Text mb={2} fontSize="lg" fontWeight="bold" color="cyan.500">
         Selecione um tema:
       </Text>
       <Select

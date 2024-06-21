@@ -15,7 +15,7 @@ const LanguageSelector = ({ language, onSelect }) => {
   return (
     <Box ml={2} mb={4}>
       {/* Título da seção de seleção de linguagem */}
-      <Text mb={1} fontSize="lg" fontWeight="bold" color="cyan.200">
+      <Text mb={1} fontSize="lg" fontWeight="bold" color="cyan.500">
         Selecione uma linguagem:
       </Text>
       {/* Menu de seleção de linguagem */}

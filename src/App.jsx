@@ -11,8 +11,8 @@ function App() {
       </Text>
         </Box>
       </Flex>
-      <Box p={1}>
-        <CodeEditor />
+      <Box>
+        <CodeEditor/>
       </Box>
     </ChakraProvider>
   );
