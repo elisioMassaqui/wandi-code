@@ -1,40 +1,50 @@
 import {
-  Box,
-  Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  Text,
-} from '@chakra-ui/react'
-import React, { version } from 'react'
-import { LANGUAGE_VERSIONS } from '../constants'
+  Box,             // Importa o componente Box do Chakra UI
+  Button,          // Importa o componente Button do Chakra UI
+  Menu,            // Importa o componente Menu do Chakra UI
+  MenuButton,      // Importa o componente MenuButton do Chakra UI
+  MenuList,        // Importa o componente MenuList do Chakra UI
+  MenuItem,        // Importa o componente MenuItem do Chakra UI
+  Text             // Importa o componente Text do Chakra UI
+} from '@chakra-ui/react';
+import React from 'react'; // Importa React
+import { LANGUAGE_VERSIONS } from '../constants'; // Importa as versões de linguagem de um arquivo de constantes
 
-const languages = Object.entries(LANGUAGE_VERSIONS)
+// Converte o objeto de versões de linguagem em um array de entradas
+const languages = Object.entries(LANGUAGE_VERSIONS);
 
-export const LanguageSelector = () => {
+/**
+ * Componente LanguageSelector
+ * @param {Object} props - Propriedades do componente
+ * @param {string} props.language - A linguagem selecionada atualmente
+ * @param {Function} props.onSelect - Função chamada ao selecionar uma linguagem
+ */
+export const LanguageSelector = ({ language, onSelect }) => {
   return (
     <Box>
-        <Text mb={2} fontSize="lg">
-          Language
-        </Text>
-
-  <Menu>
-  <MenuButton as={Button}>Javascript</MenuButton>
-  <MenuList>
-    {
-      languages.map(([language, version]) => (
-          <MenuItem key={language}>
-          {language}
-          &nbsp;
-          <Text as="span" color="gray.500" fontSize="sm"></Text>
-          {version}
-          </MenuItem>
-      ))
-    }
-  </MenuList>
-  </Menu>
-
+      {/* Título da seção de seleção de linguagem */}
+      <Text mb={2} fontSize="lg">
+        Language
+      </Text>
+      {/* Menu de seleção de linguagem */}
+      <Menu>
+        {/* Botão que abre o menu */}
+        <MenuButton as={Button}>{language}</MenuButton>
+        <MenuList>
+          {languages.map(([language, version]) => (
+            <MenuItem 
+              key={language} // Chave única para cada item
+              onClick={() => onSelect(language)} // Função chamada ao clicar no item
+            >
+              {language}
+              &nbsp;
+              <Text as="span" color="gray.500" fontSize="sm">
+                {version} {/* Versão da linguagem */}
+              </Text>
+            </MenuItem>
+          ))}
+        </MenuList>
+      </Menu>
     </Box>
-  )
-}
+  );
+};
