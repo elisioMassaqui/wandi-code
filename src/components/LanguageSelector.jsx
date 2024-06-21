@@ -10,8 +10,10 @@ import {
 import React from 'react'; // Importa React
 import { LANGUAGE_VERSIONS } from '../constants'; // Importa as versões de linguagem de um arquivo de constantes
 
+
 // Converte o objeto de versões de linguagem em um array de entradas
 const languages = Object.entries(LANGUAGE_VERSIONS);
+const ACTIVE_COLOR = "cyan.400";
 
 /**
  * Componente LanguageSelector
@@ -21,24 +23,36 @@ const languages = Object.entries(LANGUAGE_VERSIONS);
  */
 const LanguageSelector = ({ language, onSelect }) => {
   return (
-    <Box>
+    <Box ml={2} mb={4}>
       {/* Título da seção de seleção de linguagem */}
-      <Text mb={2} fontSize="lg">
-        Language
+      <Text mb={1} fontSize="lg" fontWeight="bold" color="cyan">
+        Selecione uma linguagem:
       </Text>
       {/* Menu de seleção de linguagem */}
-      <Menu>
+      <Menu isLazy>
         {/* Botão que abre o menu */}
         <MenuButton as={Button}>{language}</MenuButton>
-        <MenuList>
-          {languages.map(([language, version]) => ( // Alterado para desestruturar o array corretamente
+        <MenuList bg="blue.700">
+          {languages.map(([lang, version]) => ( // Alterado para desestruturar o array corretamente
             <MenuItem 
-              key={language} // Chave única para cada item
-              onClick={() => onSelect(language)} // Função chamada ao clicar no item
+              key={lang} // Chave única para cada item
+
+              color={
+                lang === language ? ACTIVE_COLOR : ""
+              }
+              bg={
+                lang === language ? "gray.900" : "transparent"
+              }
+              _hover={{
+                color: "cyan.400",
+                bg: "cyan.700"
+              }}
+
+              onClick={() => onSelect(lang)} // Função chamada ao clicar no item
               >
-              {language}
+              {lang}
               &nbsp;
-              <Text as="span" color="gray.500" fontSize="sm">
+              <Text as="span" color="white" fontSize="sm">
                 {version} {/* Versão da linguagem */}
               </Text>
             </MenuItem>

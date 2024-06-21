@@ -1,20 +1,21 @@
 export const LANGUAGE_VERSIONS = {
-  javascript: "18.15.0",
-  typescript: "5.0.3",
-  python: "3.10.0",
-  java: "15.0.2",
-  csharp: "6.12.0",
-  php: "8.2.3",
-  c: "11",
-  cpp: "20",
-  css: "4.0.0",
-  html: "6.4.0",
-  sql: "3.1.0",
-  swift: "5.6.4",
-  kotlin: "1.6.10",
-  rust: "1.58.1",
-  go: "1.18.2",
+  c: "11",               // Ano de criação: 1972
+  sql: "3.1.0",          // Ano de criação: 1970
+  cpp: "20",             // Ano de criação: 1985
+  python: "3.10.0",      // Ano de criação: 1991
+  html: "6.4.0",         // Ano de criação: 1993
+  java: "15.0.2",        // Ano de criação: 1995
+  javascript: "18.15.0", // Ano de criação: 1995
+  php: "8.2.3",          // Ano de criação: 1995
+  csharp: "6.12.0",      // Ano de criação: 2000
+  css: "4.0.0",          // Ano de criação: 1996
+  swift: "5.6.4",        // Ano de criação: 2014
+  kotlin: "1.6.10",      // Ano de criação: 2011
+  rust: "1.58.1",        // Ano de criação: 2010
+  go: "1.18.2",          // Ano de criação: 2009
+  typescript: "5.0.3",   // Ano de criação: 2012
 };
+
 
 export const CODE_SNIPPETS = {
   javascript: `\nconsole.log("Olá, Wandi!");\n`,

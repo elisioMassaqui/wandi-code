@@ -7,7 +7,7 @@ import { CODE_SNIPPETS } from "../constants";
 const CodeEditor = () => {
   const [value, setValue] = useState(""); // Estado para o valor do editor
   const editorRef = useRef(null); // Referência mutável para o editor
-  const [language, setLanguage] = useState("javascript"); // Estado para a linguagem de programação
+  const [language, setLanguage] = useState("kotlin"); // Estado para a linguagem de programação
 
   // Função para selecionar a linguagem
   const onSelect = (language) => {
@@ -30,7 +30,7 @@ const CodeEditor = () => {
         height="75vh" // Altura do editor
         theme="vs-dark" // Tema do editor
         language={language} // Linguagem do editor
-        defaultValue="// Seja bem-vindo ao Wandi Code" // Valor inicial do editor
+        defaultValue="// Seja bem-vindo ao Wandi Code 1.0" // Valor inicial do editor
         onMount={onMount} // Callback quando o editor monta
         value={value} // Valor do editor controlado pelo estado
         onChange={(value) => setValue(value)} // Atualiza o estado ao mudar o valor
