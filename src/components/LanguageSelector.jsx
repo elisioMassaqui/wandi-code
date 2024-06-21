@@ -31,12 +31,12 @@ const LanguageSelector = ({ language, onSelect }) => {
         {/* Botão que abre o menu */}
         <MenuButton as={Button}>{language}</MenuButton>
         <MenuList>
-          {languages.map(([lang, version]) => ( // Alterado para desestruturar o array corretamente
+          {languages.map(([language, version]) => ( // Alterado para desestruturar o array corretamente
             <MenuItem 
-              key={lang} // Chave única para cada item
-              onClick={() => onSelect(lang)} // Função chamada ao clicar no item
-            >
-              {lang}
+              key={language} // Chave única para cada item
+              onClick={() => onSelect(language)} // Função chamada ao clicar no item
+              >
+              {language}
               &nbsp;
               <Text as="span" color="gray.500" fontSize="sm">
                 {version} {/* Versão da linguagem */}
