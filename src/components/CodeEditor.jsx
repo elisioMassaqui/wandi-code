@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import { Editor } from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
-import ThemeSelector from "./ThemeSelector"; // Importa o componente ThemeSelector
+import ThemeSelector from "./ThemeSelector"; // Importa o componente .
 import { CODE_SNIPPETS } from "../constants";
 
 const CodeEditor = () => {
