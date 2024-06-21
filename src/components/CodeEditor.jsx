@@ -4,6 +4,7 @@ import { Editor } from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
 import ThemeSelector from "./ThemeSelector"; // Importa o componente ThemeSelector
 import { CODE_SNIPPETS } from "../constants";
+import { parseTmTheme } from "monaco-themes";
 
 const CodeEditor = () => {
   const [value, setValue] = useState(""); // Estado para o valor do editor
