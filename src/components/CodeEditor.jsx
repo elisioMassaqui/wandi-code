@@ -46,7 +46,7 @@ const CodeEditor = () => {
   return (
     <Box
       bgColor={backgroundColor} // Define a cor de fundo com base no estado backgroundColor
-      mr="350" // afastamento com lado direito.
+      mr="350px" // Afastamento à direita com 350 pixels
       p="4" // Padding de 4 unidades
       borderWidth="1px" // Borda de 1 pixel
       borderRadius="lg" // Borda arredondada
@@ -54,7 +54,7 @@ const CodeEditor = () => {
       mb="4" // Margem inferior de 4 unidades
       transition="all 0.4s" // Transição suave de 0.4 segundos
       _hover={{
-        boxShadow: "xl", // Aumenta a sombra ao passar o mouse
+        outline: "2px solid cyan", // Apenas altera a borda para cyan ao passar o mouse
       }}
     >
       <Flex justify="space-between" mb="4"> {/* Espaçamento entre os seletores e margem inferior */}
