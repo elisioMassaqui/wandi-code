@@ -1,17 +1,7 @@
-import {
-  Box,             // Importa o componente Box do Chakra UI
-  Button,          // Importa o componente Button do Chakra UI
-  Menu,            // Importa o componente Menu do Chakra UI
-  MenuButton,      // Importa o componente MenuButton do Chakra UI
-  MenuList,        // Importa o componente MenuList do Chakra UI
-  MenuItem,        // Importa o componente MenuItem do Chakra UI
-  Text             // Importa o componente Text do Chakra UI
-} from '@chakra-ui/react';
-import React from 'react'; // Importa React
+import React from "react";
+import { Box, Button, Menu, MenuButton, MenuList, MenuItem, Text } from "@chakra-ui/react"; // Importa os componentes necessários do Chakra UI
 import { LANGUAGE_VERSIONS } from '../constants'; // Importa as versões de linguagem de um arquivo de constantes
 
-
-// Converte o objeto de versões de linguagem em um array de entradas
 const languages = Object.entries(LANGUAGE_VERSIONS);
 const ACTIVE_COLOR = "cyan.400";
 
@@ -31,29 +21,21 @@ const LanguageSelector = ({ language, onSelect }) => {
       {/* Menu de seleção de linguagem */}
       <Menu isLazy>
         {/* Botão que abre o menu */}
-        <MenuButton as={Button}>{language}</MenuButton>
+        <MenuButton as={Button} color="white" bg="blue.800" _hover={{ bg: "blue.700" }} _active={{ bg: "blue.700" }}>
+          {language}
+        </MenuButton>
         <MenuList bg="blue.700">
-          {languages.map(([lang, version]) => ( // Alterado para desestruturar o array corretamente
-            <MenuItem 
-              key={lang} // Chave única para cada item
-
-              color={
-                lang === language ? ACTIVE_COLOR : ""
-              }
-              bg={
-                lang === language ? "gray.900" : "transparent"
-              }
-              _hover={{
-                color: "cyan.400",
-                bg: "cyan.700"
-              }}
-
-              onClick={() => onSelect(lang)} // Função chamada ao clicar no item
-              >
-              {lang}
-              &nbsp;
+          {languages.map(([lang, version]) => (
+            <MenuItem
+              key={lang}
+              color={lang === language ? ACTIVE_COLOR : ""}
+              bg={lang === language ? "gray.900" : "transparent"}
+              _hover={{ color: "cyan.400", bg: "cyan.700" }}
+              onClick={() => onSelect(lang)}
+            >
+              {lang}&nbsp;
               <Text as="span" color="white" fontSize="sm">
-                {version} {/* Versão da linguagem */}
+                {version}
               </Text>
             </MenuItem>
           ))}
@@ -63,4 +45,4 @@ const LanguageSelector = ({ language, onSelect }) => {
   );
 };
 
-export default LanguageSelector; // Exporta o componente LanguageSelector.
+export default LanguageSelector;
