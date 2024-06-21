@@ -6,9 +6,9 @@ function App() {
     <ChakraProvider>
       <Flex minHeight="1vh" alignItems="center" justifyContent="center">
         <Box textAlign="center">
-          <Text fontSize="2xl" fontWeight="bold" mb={4}>
-            Wandi Code
-          </Text>
+        <Text mb={1} fontSize="5xl" fontWeight="bold" color="cyan">
+        Wandi-Code
+      </Text>
         </Box>
       </Flex>
       <Box p={4}>
