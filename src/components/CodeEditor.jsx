@@ -1,8 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import { Editor } from "@monaco-editor/react";
 import LanguageSelector from "./LanguageSelector";
-import ThemeSelector from "./ThemeSelector"; // Importa o componente .
+import ThemeSelector from "./ThemeSelector"; // Importa o componente ThemeSelector
 import { CODE_SNIPPETS } from "../constants";
 
 const CodeEditor = () => {
@@ -11,6 +11,16 @@ const CodeEditor = () => {
   const [language, setLanguage] = useState("kotlin"); // Estado para a linguagem de programação
   const [theme, setTheme] = useState("vs-dark"); // Estado para o tema do editor
 
+  // Definição das cores de fundo para cada tema
+  const themeBackgroundColors = {
+    "vs-dark": "#1e1e1e",
+    "vs-light": "#ffffff",
+    "hc-black": "#000000",
+  };
+
+  // Estado para a cor de fundo da Box principal
+  const [backgroundColor, setBackgroundColor] = useState(themeBackgroundColors[theme]);
+
   // Função para selecionar a linguagem
   const onSelectLanguage = (language) => {
     setLanguage(language);
@@ -18,9 +28,14 @@ const CodeEditor = () => {
   };
 
   // Função para selecionar o tema
-  const onSelectTheme = (theme) => {
-    setTheme(theme);
+  const onSelectTheme = (selectedTheme) => {
+    setTheme(selectedTheme);
   };
+
+  // Atualiza a cor de fundo quando o tema é alterado
+  useEffect(() => {
+    setBackgroundColor(themeBackgroundColors[theme]);
+  }, [theme]);
 
   // Função chamada quando o editor é montado
   const onMount = (editor) => {
@@ -30,18 +45,19 @@ const CodeEditor = () => {
 
   return (
     <Box
-      mr="300px" // Margem direita de 20 pixels
+      bgColor={backgroundColor} // Define a cor de fundo com base no estado backgroundColor
+      mr="350" // afastamento com lado direito.
       p="4" // Padding de 4 unidades
       borderWidth="1px" // Borda de 1 pixel
       borderRadius="lg" // Borda arredondada
       boxShadow="md" // Sombra média
       mb="4" // Margem inferior de 4 unidades
-      transition="all 0.2s" // Transição suave de 0.2 segundos para hover
+      transition="all 0.4s" // Transição suave de 0.4 segundos
       _hover={{
         boxShadow: "xl", // Aumenta a sombra ao passar o mouse
       }}
     >
-      <Flex justify="space-between" mb="1"> {/* Espaçamento entre os seletores e margem inferior */}
+      <Flex justify="space-between" mb="4"> {/* Espaçamento entre os seletores e margem inferior */}
         <LanguageSelector language={language} onSelect={onSelectLanguage} />
         <ThemeSelector onSelectTheme={onSelectTheme} currentTheme={theme} />
       </Flex>
