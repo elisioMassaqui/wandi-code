@@ -1,19 +1,21 @@
-import { Box } from "@chakra-ui/react";
-import { Editor } from "@monaco-editor/react";
-import { useRef, useState } from "react";
-import { LanguageSelector } from "./LanguageSelector";
+import { Box } from "@chakra-ui/react"; // Importa o componente Box do Chakra UI
+import { Editor } from "@monaco-editor/react"; // Importa o componente Editor do Monaco Editor
+import { useRef, useState } from "react"; // Importa hooks useRef e useState do React
+import LanguageSelector from "./LanguageSelector"; // Importa o componente LanguageSelector
 
 const CodeEditor = () => {
   const [value, setValue] = useState(""); // Estado para o valor do editor
   const editorRef = useRef(null); // Referência mutável para o editor
   const [language, setLanguage] = useState("javascript"); // Estado para a linguagem de programação
 
+  // Função para selecionar a linguagem
   const onSelect = (language) => {
     setLanguage(language);
   };
 
+  // Função chamada quando o editor é montado
   const onMount = (editor) => {
-    editorRef.current = editor; // Atualiza a referência do editor ao montar
+    editorRef.current = editor; // Atualiza a referência do editor
     editor.focus(); // Foca no editor ao montar
   };
 
@@ -33,4 +35,4 @@ const CodeEditor = () => {
   );
 };
 
-export default CodeEditor;
+export default CodeEditor; // Exporta o componente CodeEditor

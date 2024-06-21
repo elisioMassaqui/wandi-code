@@ -19,7 +19,7 @@ const languages = Object.entries(LANGUAGE_VERSIONS);
  * @param {string} props.language - A linguagem selecionada atualmente
  * @param {Function} props.onSelect - Função chamada ao selecionar uma linguagem
  */
-export const LanguageSelector = ({ language, onSelect }) => {
+const LanguageSelector = ({ language, onSelect }) => {
   return (
     <Box>
       {/* Título da seção de seleção de linguagem */}
@@ -31,12 +31,12 @@ export const LanguageSelector = ({ language, onSelect }) => {
         {/* Botão que abre o menu */}
         <MenuButton as={Button}>{language}</MenuButton>
         <MenuList>
-          {languages.map(([language, version]) => (
+          {languages.map(([lang, version]) => ( // Alterado para desestruturar o array corretamente
             <MenuItem 
-              key={language} // Chave única para cada item
-              onClick={() => onSelect(language)} // Função chamada ao clicar no item
+              key={lang} // Chave única para cada item
+              onClick={() => onSelect(lang)} // Função chamada ao clicar no item
             >
-              {language}
+              {lang}
               &nbsp;
               <Text as="span" color="gray.500" fontSize="sm">
                 {version} {/* Versão da linguagem */}
@@ -48,3 +48,5 @@ export const LanguageSelector = ({ language, onSelect }) => {
     </Box>
   );
 };
+
+export default LanguageSelector; // Exporta o componente LanguageSelector.
