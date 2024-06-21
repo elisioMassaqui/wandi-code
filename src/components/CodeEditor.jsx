@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react"; // Importa o componente Box do Chakra UI
 import { Editor } from "@monaco-editor/react"; // Importa o componente Editor do Monaco Editor
 import { useRef, useState } from "react"; // Importa hooks useRef e useState do React
 import LanguageSelector from "./LanguageSelector"; // Importa o componente LanguageSelector
+import { CODE_SNIPPETS } from "../constants";
 
 const CodeEditor = () => {
   const [value, setValue] = useState(""); // Estado para o valor do editor
@@ -11,6 +12,9 @@ const CodeEditor = () => {
   // Função para selecionar a linguagem
   const onSelect = (language) => {
     setLanguage(language);
+    setValue(
+      CODE_SNIPPETS[language]
+    )
   };
 
   // Função chamada quando o editor é montado
