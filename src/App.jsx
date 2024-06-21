@@ -1,11 +1,15 @@
-import { Box, ChakraProvider } from '@chakra-ui/react'
+// App.js
+import { Box, ChakraProvider } from '@chakra-ui/react';
 import CodeEditor from './components/CodeEditor';
 
 function App() {
- return <Box Box minH="100vh" bg="#0f0a19" color="gray.500" px={6} py={8}>
-  Wandi Code
-  <CodeEditor></CodeEditor>
-  </Box>;
+  return (
+    <ChakraProvider>
+      <Box p={4}>
+        <CodeEditor />
+      </Box>
+    </ChakraProvider>
+  );
 }
 
-export default App
+export default App;
