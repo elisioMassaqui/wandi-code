@@ -1,5 +1,6 @@
 import { Box, ChakraProvider, Flex, Text } from "@chakra-ui/react";
 import CodeEditor from "./components/CodeEditor";
+import tema from "./theme";
 
 function App() {
   return (
