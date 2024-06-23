@@ -48,7 +48,7 @@ function App() {
   };
 
   const topBarColor = ("cyan.600");
-  const toolbarBarColor = ("cyan.400");
+  const toolbarBarColor = ("gray.800");
   const sidebarBarColor = ("gray.900");
   const footerBarColor = ("cyan.300");
 
