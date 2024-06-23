@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Box, ChakraProvider, Flex, Text, Button, IconButton, useToast } from "@chakra-ui/react";
+import { Box, ChakraProvider, Flex, Text, Button, IconButton, useToast, Divider } from "@chakra-ui/react";
 import { Editor } from "@monaco-editor/react";
 import LanguageSelector from "./components/LanguageSelector";
 import { CODE_SNIPPETS } from "./constants";
@@ -94,15 +94,10 @@ function App() {
             <Box flex="1" position="relative" height="100%" bgColor={geraTheme}>
 
             <Box
-                height="90%"
-                overflowY="auto"
-                border="1px solid"
-                borderRadius="3"
-                borderColor={isError ? "red.500" : "#333"}
+                height="100%"
+                width="100%"
                 fontSize="sm"
                 p={1}
-                bg={isError ? "red.100" : "gray.800"}
-                color={isError ? "red.800" : "white"}
               >
                <Editor
                 height="100%"
@@ -119,10 +114,12 @@ function App() {
               />
             </Box>
               </Box>
+              <Divider></Divider>
             {/* Output Panel */}
-            <Box h={"25%"} p={1} bgColor={geraTheme}>
+            <Box h={"20%"} p={1} bgColor={geraTheme}>
               <Box
                 height="100%"
+                width="100%"
                 overflowY="auto"
                 border="1px solid"
                 borderRadius="3"
