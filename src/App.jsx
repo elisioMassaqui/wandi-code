@@ -47,50 +47,42 @@ function App() {
     }
   };
 
+  const topBarColor = ("cyan.600");
+  const toolbarBarColor = ("cyan.400");
+  const sidebarBarColor = ("gray.900");
+  const footerBarColor = ("cyan.300");
+
   return (
     <ChakraProvider>
       <Flex flexDirection="column" height="100vh">
         {/* Top Bar */}
-        <Flex p={2} bg="#1e1e1e" alignItems="center" justifyContent="space-between">
+        <Flex p={2} bg={topBarColor} alignItems="center" justifyContent="space-between">
           <Text fontSize="2xl" fontWeight="bold" color="white">
             Wandi-Code
           </Text>
           <Flex alignItems="center">
-            <IconButton
-              ml={2}
-              colorScheme="blue"
-              aria-label="Documentation"
-              icon={<AiOutlineFileText />}
-              onClick={() => {/* Adicione a lógica de navegação para a documentação */}}
-            />
-            <IconButton
-              ml={2}
-              colorScheme="blue"
-              aria-label="Help"
-              icon={<AiOutlineQuestionCircle />}
-              onClick={() => {/* Adicione a lógica para exibir ajuda */}}
-            />
-            <Button
+          <Button
               ml={2}
               colorScheme="green"
               isLoading={isLoading}
               onClick={runCode}
             >
-              Run Code
+              Compilar
             </Button>
           </Flex>
+        </Flex>
+
+        {/* Toolbar */}
+        <Flex p={2} alignItems="center" bg={toolbarBarColor}>
+          <Text fontSize="lg" fontWeight="bold" color="white">
+              TOOOOOOOOOOLLLLLLLBBBBBBAAARRRRR
+          </Text>
         </Flex>
 
         {/* Main Content */}
         <Flex flex="1" overflow="hidden">
           {/* Sidebar */}
-          <Box width="250px" bg="#333" color="white" boxShadow="0 0 10px rgba(0,0,0,0.5)">
-            {/* Toolbar */}
-            <Flex p={2} alignItems="center" bg="#1e1e1e">
-              <Text fontSize="lg" fontWeight="bold" color="white">
-                Explorer
-              </Text>
-            </Flex>
+          <Box width="200px" bg={sidebarBarColor} color="white" boxShadow="0 0 10px rgba(0,0,0,0.5)">
             {/* Language Selector */}
             <Box p={2}>
               <LanguageSelector language={language} onSelect={onSelect} />
