@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 import { Box, ChakraProvider, Flex, Text, Button, IconButton, useToast } from "@chakra-ui/react";
 import { Editor } from "@monaco-editor/react";
-import { AiOutlineFileText, AiOutlineQuestionCircle } from "react-icons/ai"; // Importação dos ícones
 import LanguageSelector from "./components/LanguageSelector";
 import { CODE_SNIPPETS } from "./constants";
 import { executeCode } from "./api";
+import { FaPlay } from "react-icons/fa";
 
 function App() {
   const editorRef = useRef();
@@ -47,8 +47,9 @@ function App() {
     }
   };
 
+  const geraTheme = ("gray.800");
   const topBarColor = ("blue.900");
-  const toolbarBarColor = ("gray.800");
+  const toolbarBarColor = (geraTheme);
   const sidebarBarColor = ("gray.900");
   const footerBarColor = ("blue.900");
 
@@ -56,24 +57,22 @@ function App() {
     <ChakraProvider>
       <Flex flexDirection="column" height="100vh">
         {/* Top Bar */}
-        <Flex p={2} bg={topBarColor} alignItems="center" justifyContent="space-between">
-          <Text fontSize="2xl" fontWeight="bold" color="white">
+        <Flex p={1} bg={topBarColor} alignItems="center" justifyContent="space-between">
+          <Text fontFamily={"cursive"} fontSize={"large"} fontWeight="bold" color="white">
             Wandi-Code
           </Text>
-          <Flex alignItems="center">
           <Button
-              ml={2}
+              size="md"
               colorScheme="green"
               isLoading={isLoading}
               onClick={runCode}
             >
-              Compilar
+              <FaPlay></FaPlay>
             </Button>
-          </Flex>
         </Flex>
 
         {/* Toolbar */}
-        <Flex p={2} alignItems="center" bg={toolbarBarColor}>
+        <Flex p={1} alignItems="center" bg={toolbarBarColor}>
           <Text fontSize="lg" fontWeight="bold" color="white">
               TOOOOOOOOOOLLLLLLLBBBBBBAAARRRRR
           </Text>
@@ -92,9 +91,22 @@ function App() {
           {/* Main Content Area */}
           <Flex flex="1" flexDirection="column">
             {/* Editor */}
-            <Box flex="1" position="relative" height="100%">
-              <Editor
+            <Box flex="1" position="relative" height="100%" bgColor={geraTheme}>
+
+            <Box
+                height="90%"
+                overflowY="auto"
+                border="1px solid"
+                borderRadius="3"
+                borderColor={isError ? "red.500" : "#333"}
+                fontSize="sm"
+                p={1}
+                bg={isError ? "red.100" : "gray.800"}
+                color={isError ? "red.800" : "white"}
+              >
+               <Editor
                 height="100%"
+                width="85%"
                 theme="vs-dark"
                 language={language}
                 defaultValue={CODE_SNIPPETS[language]}
@@ -106,13 +118,14 @@ function App() {
                 }}
               />
             </Box>
+              </Box>
             {/* Output Panel */}
-            <Box height="30%" p={2} overflowY="auto" bg="#2D2D2D" color="white" boxShadow="0 0 10px rgba(0,0,0,0.5)">
+            <Box h={"25%"} p={1} bgColor={geraTheme}>
               <Box
                 height="100%"
                 overflowY="auto"
                 border="1px solid"
-                borderRadius="md"
+                borderRadius="3"
                 borderColor={isError ? "red.500" : "#333"}
                 p={2}
                 fontSize="sm"
@@ -127,7 +140,7 @@ function App() {
           </Flex>
         </Flex>
             {/* Footer */}
-            <Box as="footer" p="4" bg={footerBarColor} textAlign="center">
+            <Box as="footer" p="1" bg={footerBarColor} textAlign="center">
           <Text fontSize="sm" color={"white"}>&copy; {new Date().getFullYear()} Wandi Code. All rights reserved.</Text>
         </Box>
       </Flex>

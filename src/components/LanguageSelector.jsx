@@ -13,11 +13,9 @@ const ACTIVE_COLOR = "cyan.400";
  */
 const LanguageSelector = ({ language, onSelect }) => {
   return (
-    <Box ml={2} mb={4}>
+    <Box ml={1} mb={2}>
       {/* Título da seção de seleção de linguagem */}
-      <Text mb={1} fontSize="lg" fontWeight="bold" color="cyan.500">
-        Selecione uma linguagem:
-      </Text>
+      
       {/* Menu de seleção de linguagem */}
       <Menu isLazy>
         {/* Botão que abre o menu */}
