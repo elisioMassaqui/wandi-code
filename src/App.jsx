@@ -47,10 +47,10 @@ function App() {
     }
   };
 
-  const topBarColor = ("cyan.600");
+  const topBarColor = ("blue.900");
   const toolbarBarColor = ("gray.800");
   const sidebarBarColor = ("gray.900");
-  const footerBarColor = ("cyan.300");
+  const footerBarColor = ("blue.900");
 
   return (
     <ChakraProvider>
@@ -126,6 +126,10 @@ function App() {
             </Box>
           </Flex>
         </Flex>
+            {/* Footer */}
+            <Box as="footer" p="4" bg={footerBarColor} textAlign="center">
+          <Text fontSize="sm" color={"white"}>&copy; {new Date().getFullYear()} Wandi Code. All rights reserved.</Text>
+        </Box>
       </Flex>
     </ChakraProvider>
   );
