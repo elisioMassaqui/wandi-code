@@ -6,7 +6,7 @@
 
 > **Neste projeto, você aprenderá a construir um editor de código que suporta múltiplas linguagens diretamente no navegador! Utilizaremos a biblioteca Monaco React para o editor de código, Chakra UI para estilizar nossa aplicação e a Piston API para executar o código.**
 
-[!](https://github.com/elisioMassaqui/wandi-code/blob/master/Anota%C3%A7%C3%A3o%202024-06-24%20120112.png)
+![Splash Screen](https://github.com/elisioMassaqui/wandi-code/blob/master/Anota%C3%A7%C3%A3o%202024-06-24%20120112.png)
 
 ## 🚀 Funcionalidades
 
