@@ -89,19 +89,22 @@ function App() {
           </Box>
 
           {/* Main Content Area */}
-          <Flex flex="1" flexDirection="column">
+          <Flex flex="1" flexDirection="column" bgColor={geraTheme}>
             {/* Editor */}
             <Box flex="1" position="relative" height="100%" bgColor={geraTheme}>
 
             <Box
                 height="100%"
-                width="100%"
+                width="80%"
                 fontSize="sm"
+                border="1px solid"
+                borderRadius="2"
+                borderColor={"cyan.600"}
                 p={1}
               >
                <Editor
                 height="100%"
-                width="85%"
+                width="100%"
                 theme="vs-dark"
                 language={language}
                 defaultValue={CODE_SNIPPETS[language]}
@@ -114,15 +117,14 @@ function App() {
               />
             </Box>
               </Box>
-              <Divider></Divider>
             {/* Output Panel */}
-            <Box h={"20%"} p={1} bgColor={geraTheme}>
+            <Box h={"20%"} w="80%" bgColor={geraTheme}>
               <Box
                 height="100%"
                 width="100%"
                 overflowY="auto"
                 border="1px solid"
-                borderRadius="3"
+                borderRadius="1"
                 borderColor={isError ? "red.500" : "#333"}
                 p={2}
                 fontSize="sm"
@@ -137,7 +139,7 @@ function App() {
           </Flex>
         </Flex>
             {/* Footer */}
-            <Box as="footer" p="1" bg={footerBarColor} textAlign="center">
+            <Box as="footer" p="1.5" bg={footerBarColor} textAlign="center">
           <Text fontSize="sm" color={"white"}>&copy; {new Date().getFullYear()} Wandi Code. All rights reserved.</Text>
         </Box>
       </Flex>
