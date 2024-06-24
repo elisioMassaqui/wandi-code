@@ -8,6 +8,7 @@
 
 ![Splash Screen](https://github.com/elisioMassaqui/wandi-code/blob/master/Anota%C3%A7%C3%A3o%202024-06-24%20120112.png)
 
+
 ## 🚀 Funcionalidades
 
 - ✍️ **Monaco React Editor**: Um componente de editor de código poderoso para React.
@@ -50,63 +51,4 @@ Inicie o servidor de desenvolvimento:
 npm run dev
 ```
 
-🚧 Desenvolvimento com React + Vite
-Este projeto utiliza React + Vite para um ambiente de desenvolvimento rápido e eficiente. Aqui estão alguns pontos-chave sobre o uso de React + Vite no Wandi-Code:
-
-📦 Configuração do Vite
-Vite é uma ferramenta de construção que oferece um desenvolvimento incrivelmente rápido para projetos React. Ele utiliza uma abordagem de construção moderna, carregando módulos de forma eficiente durante o desenvolvimento.
-
-```js
-// vite.config.js
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    port: 3000,
-  },
-});
-```
-
-⚛️ Estrutura do Projeto
-A estrutura do projeto é organizada para manter o código limpo e modular:
-
-```css
-wandi-code/
-├── public/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── App.jsx
-│   ├── main.jsx
-├── vite.config.js
-├── package.json
-```
-
-🔥 Desenvolvimento Rápido
-Com Vite, as mudanças no código são refletidas instantaneamente no navegador, sem necessidade de recarregar a página. Isso acelera significativamente o ciclo de desenvolvimento.
-
-📂 Componentização
-Os componentes React são organizados em diretórios dentro de src/components para promover a reutilização e a manutenção do código.
-
-```jsx
-// src/components/Editor.jsx
-import React from 'react';
-import { MonacoEditor } from '@monaco-editor/react';
-
-const Editor = ({ language, value, onChange }) => {
-  return (
-    <MonacoEditor
-      height="90vh"
-      language={language}
-      value={value}
-      onChange={onChange}
-    />
-  );
-};
-
-export default Editor;
-```
-
-Utilizando React + Vite, conseguimos um ambiente de desenvolvimento ágil e moderno, que facilita a construção de aplicações web performáticas e responsivas.
+[Sobre Compilador online Piston API](https://github.com/elisioMassaqui/wandi-code/blob/master/sobre%20compilar%20online.md)

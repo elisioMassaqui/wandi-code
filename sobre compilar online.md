@@ -85,6 +85,8 @@ executeCode(language, sourceCode)
   });
 ```
 
+![Compiler](https://github.com/elisioMassaqui/wandi-code/blob/master/piston.png)
+
 Nesse exemplo, estamos pedindo para o tradutor escrever "Olá, Mundo!" em Python. O executeCode envia essa mensagem para o ***tradutor (API Piston)***, e ele nos dá uma resposta que imprimimos no console.
 Por que isso é útil?
 
