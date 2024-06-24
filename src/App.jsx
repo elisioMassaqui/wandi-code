@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Box, ChakraProvider, Flex, Text, Button, IconButton, useToast, Divider } from "@chakra-ui/react";
+import { Box, ChakraProvider, Flex, Text, Button, useToast } from "@chakra-ui/react";
 import { Editor } from "@monaco-editor/react";
 import LanguageSelector from "./components/LanguageSelector";
 import { CODE_SNIPPETS } from "./constants";
@@ -47,78 +47,62 @@ function App() {
     }
   };
 
-  const geraTheme = ("gray.800");
-  const topBarColor = ("blue.900");
-  const toolbarBarColor = (geraTheme);
-  const sidebarBarColor = ("gray.900");
-  const footerBarColor = ("blue.900");
+  const geraTheme = "gray.800";
+  const topBarColor = "blue.900";
+  const toolbarBarColor = geraTheme;
+  const sidebarBarColor = "gray.900";
+  const footerBarColor = "blue.900";
 
   return (
     <ChakraProvider>
       <Flex flexDirection="column" height="100vh">
         {/* Top Bar */}
-        <Flex p={1} bg={topBarColor} alignItems="center" justifyContent="space-between">
-          <Text fontFamily={"cursive"} fontSize={"large"} fontWeight="bold" color="white">
+        <Flex p={3} bg={topBarColor} alignItems="center" justifyContent="space-between">
+          <Text fontFamily={"cursive"} fontSize={"25px"} color="white">
             Wandi-Code
           </Text>
-          <Button
-              size="md"
-              colorScheme="green"
-              isLoading={isLoading}
-              onClick={runCode}
-            >
-              <FaPlay></FaPlay>
-            </Button>
+          <Button size="md" colorScheme="green" isLoading={isLoading} onClick={runCode}>
+            <FaPlay />
+          </Button>
         </Flex>
 
         {/* Toolbar */}
         <Flex h={"8%"} alignItems="center" bg={toolbarBarColor}>
-          <Text fontSize="80%" fontWeight="bold" color="white">
-          A Barra de ferramentas é um componente utilizado pelos softwares com interface gráfica com a finalidade de permitir uma ação rápida por parte do usuário, facilitando o acesso a funções do programa. 
+          <Text fontSize="80%" color="white">
+            A Barra de ferramentas é um componente utilizado pelos softwares com interface gráfica com a finalidade de permitir uma ação rápida por parte do usuário, facilitando o acesso a funções do programa.
           </Text>
         </Flex>
 
         {/* Main Content */}
         <Flex flex="1" overflow="hidden">
           {/* Sidebar */}
-          <Box width="200px" bg={sidebarBarColor} color="white" boxShadow="0 0 10px rgba(0,0,0,0.5)">
+          <Box width={{ base: "100px", md: "100px" }} bg={sidebarBarColor} color="white" boxShadow="0 0 10px rgba(0,0,0,0.5)">
             {/* Language Selector */}
-            <Box p={2}>
-              <LanguageSelector language={language} onSelect={onSelect} />
-            </Box>
+          <Box>
+            <LanguageSelector language={language} onSelect={onSelect} />
+          </Box>
           </Box>
 
           {/* Main Content Area */}
-          <Flex flex="1" flexDirection="column" bgColor={geraTheme}>
+          <Flex flex="1" direction={{ base: "column", md: "row" }} bgColor={geraTheme}>
             {/* Editor */}
-            <Box flex="1" position="relative" height="100%" bgColor={geraTheme}>
-
-            <Box
-                height="100%"
-                width="80%"
-                fontSize="sm"
-                border="1px solid"
-                borderRadius="2"
-                borderColor={"cyan.600"}
-                p={1}
-              >
-               <Editor
-                height="100%"
-                width="100%"
-                theme="vs-dark"
-                language={language}
-                defaultValue={CODE_SNIPPETS[language]}
-                onMount={onMount}
-                value={value}
-                onChange={(value) => setValue(value)}
-                options={{
-                  minimap: { enabled: false },
-                }}
-              />
-            </Box>
+            <Box flex="1"  width={{ base: "98%", md: "50%" }} height={{ base: "50%", md: "100%" }} bgColor={geraTheme}>
+              <Box height="100%" width="100%" fontSize="sm">
+                <Editor
+                  height="100%"
+                  width="100%"
+                  theme="vs-dark"
+                  language={language}
+                  defaultValue={CODE_SNIPPETS[language]}
+                  onMount={onMount}
+                  value={value}
+                  onChange={(value) => setValue(value)}
+                  options={{ minimap: { enabled: false } }}
+                />
               </Box>
+            </Box>
             {/* Output Panel */}
-            <Box h={"20%"} w="80%" bgColor={geraTheme}>
+            <Box width={{ base: "98%", md: "30%" }} height={{ base: "20%", md: "100%" }} bgColor={geraTheme}>
               <Box
                 height="100%"
                 width="100%"
@@ -131,16 +115,17 @@ function App() {
                 bg={isError ? "red.100" : "gray.800"}
                 color={isError ? "red.800" : "white"}
               >
-                {output
-                  ? output.map((line, i) => <div key={i}>{line}</div>)
-                  : 'Click "Run Code" to see the output here'}
+                {output ? output.map((line, i) => <div key={i}>{line}</div>) : 'Click "Run Code" to see the output here'}
               </Box>
             </Box>
           </Flex>
         </Flex>
-            {/* Footer */}
-            <Box as="footer" p="1.5" bg={footerBarColor} textAlign="center">
-          <Text fontSize="sm" color={"white"}>&copy; {new Date().getFullYear()} Wandi Code. All rights reserved.</Text>
+
+        {/* Footer */}
+        <Box as="footer" p="1.5" bg={footerBarColor} textAlign="center">
+          <Text fontSize="sm" color={"white"}>
+            &copy; {new Date().getFullYear()} Wandi Code. All rights reserved.
+          </Text>
         </Box>
       </Flex>
     </ChakraProvider>

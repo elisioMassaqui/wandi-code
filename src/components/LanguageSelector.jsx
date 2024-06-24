@@ -13,7 +13,7 @@ const ACTIVE_COLOR = "cyan.400";
  */
 const LanguageSelector = ({ language, onSelect }) => {
   return (
-    <Box ml={1} mb={2}>
+    <Box>
       {/* Título da seção de seleção de linguagem */}
       
       {/* Menu de seleção de linguagem */}
