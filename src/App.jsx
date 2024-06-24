@@ -10,7 +10,7 @@ function App() {
   const editorRef = useRef();
   const toast = useToast();
   const [value, setValue] = useState("");
-  const [language, setLanguage] = useState("javascript");
+  const [language, setLanguage] = useState("python");
   const [output, setOutput] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);

@@ -1,6 +1,6 @@
 export const LANGUAGE_VERSIONS = {
-  c: "11",               // Ano de criação: 1972
-  cpp: "20",             // Ano de criação: 1985
+  c: "10.2.0",               // Ano de criação: 1972
+  cpp: "10.2.0",             // Ano de criação: 1985
   python: "3.10.0",      // Ano de criação: 1991
   java: "15.0.2",        // Ano de criação: 1995
   javascript: "18.15.0", // Ano de criação: 1995
