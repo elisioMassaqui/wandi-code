@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import { Box, ChakraProvider, Flex, Text, Button, useToast, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { Editor } from "@monaco-editor/react";
 import { FaPlay } from "react-icons/fa";
-import { executeCode } from "./api";
 import { CODE_SNIPPETS, LANGUAGE_VERSIONS } from "./constants";
 
 const ACTIVE_COLOR = "cyan.400";
