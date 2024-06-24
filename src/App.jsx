@@ -48,7 +48,7 @@ function App() {
   };
 
   const geraTheme = "gray.800";
-  const topBarColor = "blue.900";
+  const topBarColor = "blue.500";
   const toolbarBarColor = geraTheme;
   const sidebarBarColor = "gray.900";
   const footerBarColor = "blue.900";
