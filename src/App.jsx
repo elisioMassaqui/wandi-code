@@ -1,28 +1,44 @@
 import React, { useRef, useState } from "react";
-import { Box, ChakraProvider, Flex, Text, Button, useToast, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
+import { Box, Flex, Text, Button, useToast, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 import { Editor } from "@monaco-editor/react";
 import { FaPlay } from "react-icons/fa";
+import axios from "axios";
+import { ChakraProvider } from "@chakra-ui/react";
 import { CODE_SNIPPETS, LANGUAGE_VERSIONS } from "./constants";
 
-const ACTIVE_COLOR = "cyan.400";
+const API = axios.create({
+  baseURL: "https://emkc.org/api/v2/piston",
+});
 
-const languages = Object.entries(LANGUAGE_VERSIONS);
+const ACTIVE_COLOR = "cyan.400";
 
 function App() {
   const editorRef = useRef();
   const toast = useToast();
-  const [value, setValue] = useState(CODE_SNIPPETS["python"]); // Defina a linguagem inicial aqui
-  const [language, setLanguage] = useState("python"); // Linguagem inicial selecionada
+  const [value, setValue] = useState(CODE_SNIPPETS.python);
+  const [language, setLanguage] = useState("python");
   const [output, setOutput] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  const onMount = (editor) => {
-    editorRef.current = editor;
-    editor.focus();
+  const executeCode = async (language, sourceCode) => {
+    try {
+      const response = await API.post("/execute", {
+        language: language,
+        version: LANGUAGE_VERSIONS[language],
+        files: [
+          {
+            content: sourceCode,
+          },
+        ],
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response.data.message || "Unable to execute code");
+    }
   };
 
-  const onSelectLanguage = (selectedLanguage) => {
+  const onSelectLanguage = async (selectedLanguage) => {
     setLanguage(selectedLanguage);
     setValue(CODE_SNIPPETS[selectedLanguage]);
   };
@@ -49,17 +65,11 @@ function App() {
     }
   };
 
-  const geraTheme = "gray.800";
-  const topBarColor = "blue.500";
-  const toolbarBarColor = geraTheme;
-  const sidebarBarColor = "gray.900";
-  const footerBarColor = "blue.900";
-
   return (
     <ChakraProvider>
       <Flex flexDirection="column" height="100vh">
         {/* Top Bar */}
-        <Flex p={3} bg={topBarColor} alignItems="center" justifyContent="space-between">
+        <Flex p={3} bg="blue.500" alignItems="center" justifyContent="space-between">
           <Text fontFamily="cursive" fontSize="25px" color="white">
             Wandi-Code
           </Text>
@@ -69,23 +79,22 @@ function App() {
         </Flex>
 
         {/* Toolbar */}
-        <Flex h="8%" alignItems="center" bg={toolbarBarColor}>
+        <Flex h="8%" alignItems="center" bg="gray.800">
           <Text fontSize="80%" color="white">
             A Barra de ferramentas é um componente utilizado pelos softwares com interface gráfica com a finalidade de permitir uma ação rápida por parte do usuário, facilitando o acesso a funções do programa.
           </Text>
         </Flex>
 
-        {/* Main Content */}
         <Flex flex="1" overflow="hidden">
           {/* Sidebar */}
-          <Box width={{ base: "100px", md: "100px" }} bg={sidebarBarColor} boxShadow="0 0 10px rgba(0,0,0,0.5)">
+          <Box width={{ base: "100px", md: "100px" }} bg="gray.900" boxShadow="0 0 10px rgba(0,0,0,0.5)">
             {/* Language Selector */}
             <Menu isLazy>
               <MenuButton as={Button} color="white" bg="blue.800" _hover={{ bg: "blue.700" }} _active={{ bg: "blue.700" }}>
                 {language}
               </MenuButton>
               <MenuList bg="blue.700">
-                {languages.map(([lang, version]) => (
+                {Object.entries(LANGUAGE_VERSIONS).map(([lang, version]) => (
                   <MenuItem
                     key={lang}
                     color={lang === language ? ACTIVE_COLOR : ""}
@@ -103,32 +112,31 @@ function App() {
             </Menu>
           </Box>
 
-          {/* Main Content Area */}
-          <Flex flex="1" direction={{ base: "column", md: "row" }} bgColor={geraTheme}>
+          <Flex flex="1" direction={{ base: "column", md: "row" }} bgColor="gray.800">
             {/* Editor */}
-            <Box flex="1" width={{ base: "95%", md: "50%" }} height={{ base: "50%", md: "100%" }} bgColor={geraTheme}>
+            <Box flex="1" width={{ base: "95%", md: "50%" }} height={{ base: "50%", md: "100%" }} bgColor="gray.800">
               <Editor
                 theme="vs-dark"
                 language={language}
-                defaultValue={CODE_SNIPPETS[language]}
-                onMount={onMount}
+                defaultValue={value}
+                onMount={(editor) => (editorRef.current = editor)}
                 value={value}
-                onChange={(value) => setValue(value)}
+                onChange={setValue}
                 options={{ minimap: { enabled: false } }}
               />
             </Box>
+
             {/* Output Panel */}
             <Box
               width={{ base: "95%", md: "25%" }}
               height={{ base: "20%", md: "100%" }}
-              bgColor={geraTheme}
+              bgColor={isError ? "red.100" : "gray.800"}
               overflowY="auto"
               border="1px solid"
               borderRadius="1"
               borderColor={isError ? "red.500" : "#333"}
               p={2}
               fontSize="sm"
-              bg={isError ? "red.100" : "gray.800"}
               color={isError ? "red.800" : "white"}
             >
               {output ? output.map((line, i) => <div key={i}>{line}</div>) : 'Click "Run Code" to see the output here'}
@@ -137,7 +145,7 @@ function App() {
         </Flex>
 
         {/* Footer */}
-        <Box as="footer" p="1.5" bg={footerBarColor} textAlign="center">
+        <Box as="footer" p="1.5" bg="blue.900" textAlign="center">
           <Text fontSize="sm" color="white">
             &copy; {new Date().getFullYear()} Wandi Code. All rights reserved.
           </Text>
