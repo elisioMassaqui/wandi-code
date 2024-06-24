@@ -77,14 +77,7 @@ function App() {
             <FaPlay />
           </Button>
         </Flex>
-
-        {/* Toolbar */}
-        <Flex h="8%" alignItems="center" bg="gray.800">
-          <Text fontSize="80%" color="white">
-            A Barra de ferramentas é um componente utilizado pelos softwares com interface gráfica com a finalidade de permitir uma ação rápida por parte do usuário, facilitando o acesso a funções do programa.
-          </Text>
-        </Flex>
-
+        
         <Flex flex="1" overflow="hidden">
           {/* Sidebar */}
           <Box width={{ base: "100px", md: "100px" }} bg="gray.900" boxShadow="0 0 10px rgba(0,0,0,0.5)">
