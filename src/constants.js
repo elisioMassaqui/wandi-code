@@ -13,8 +13,8 @@ export const CODE_SNIPPETS = {
   javascript: `\nconsole.log("Olá, Wandi!");\n`,
   typescript: `\nconsole.log("Olá, Wandi!");\n`,
   python: `\nprint("Olá, Wandi!")\n`,
-  java: `\npublic class HelloWorld {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println("Olá, Wandi!");\n\t}\n}\n`,
-  csharp: `\nusing System;\n\npublic class Hello {\n\tpublic static void Main() {\n\t\tConsole.WriteLine("Olá, Wandi in C#!");\n\t}\n}\n`,
+  java: `\npublic class HelloWorld {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println("Oi, Wandi!");\n\t}\n}\n`,
+  csharp: `\nusing System;\n\npublic class Hello {\n\tpublic static void Main() {\n\t\tConsole.WriteLine("Oi, Wandi in C#!");\n\t}\n}\n`,
   php: `<?php\n\n$name = 'Wandi';\necho $name;\n`,
   c: `#include <stdio.h>
 
