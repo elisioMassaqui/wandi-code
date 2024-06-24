@@ -25,7 +25,7 @@ export const CODE_SNIPPETS = {
   cpp: `#include <iostream>
 
   int main() {
-    std::cout << "Olá Wandi" << std::endl;
+    std::cout << "Olá, Wandi" << std::endl;
     return 0;  
 }`,
 };
