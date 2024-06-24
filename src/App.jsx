@@ -72,9 +72,9 @@ function App() {
         </Flex>
 
         {/* Toolbar */}
-        <Flex p={1} alignItems="center" bg={toolbarBarColor}>
-          <Text fontSize="lg" fontWeight="bold" color="white">
-              TOOOOOOOOOOLLLLLLLBBBBBBAAARRRRR
+        <Flex h={"8%"} alignItems="center" bg={toolbarBarColor}>
+          <Text fontSize="80%" fontWeight="bold" color="white">
+          A Barra de ferramentas é um componente utilizado pelos softwares com interface gráfica com a finalidade de permitir uma ação rápida por parte do usuário, facilitando o acesso a funções do programa. 
           </Text>
         </Flex>
 
