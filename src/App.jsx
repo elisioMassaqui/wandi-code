@@ -79,7 +79,7 @@ function App() {
           <Box width={{ base: "100px", md: "100px" }} bg={sidebarBarColor} color="white" boxShadow="0 0 10px rgba(0,0,0,0.5)">
             {/* Language Selector */}
           <Box>
-            <LanguageSelector language={language} onSelect={onSelect} />
+            <LanguageSelector language={language} onSelect={onSelect}></LanguageSelector>
           </Box>
           </Box>
 
@@ -88,33 +88,14 @@ function App() {
             {/* Editor */}
             <Box flex="1"  width={{ base: "98%", md: "50%" }} height={{ base: "50%", md: "100%" }} bgColor={geraTheme}>
               <Box height="100%" width="100%" fontSize="sm">
-                <Editor
-                  height="100%"
-                  width="100%"
-                  theme="vs-dark"
-                  language={language}
-                  defaultValue={CODE_SNIPPETS[language]}
-                  onMount={onMount}
-                  value={value}
-                  onChange={(value) => setValue(value)}
-                  options={{ minimap: { enabled: false } }}
+                <Editor height="100%" width="100%" theme="vs-dark" language={language} defaultValue={CODE_SNIPPETS[language]} onMount={onMount} value={value} onChange={(value) => setValue(value)} options={{ minimap: { enabled: false } }}
                 />
               </Box>
             </Box>
             {/* Output Panel */}
             <Box width={{ base: "98%", md: "30%" }} height={{ base: "20%", md: "100%" }} bgColor={geraTheme}>
-              <Box
-                height="100%"
-                width="100%"
-                overflowY="auto"
-                border="1px solid"
-                borderRadius="1"
-                borderColor={isError ? "red.500" : "#333"}
-                p={2}
-                fontSize="sm"
-                bg={isError ? "red.100" : "gray.800"}
-                color={isError ? "red.800" : "white"}
-              >
+              <Box height="100%" width="100%" overflowY="auto" border="1px solid" borderRadius="1"
+                borderColor={isError ? "red.500" : "#333"} p={2} fontSize="sm" bg={isError ? "red.100" : "gray.800"}color={isError ? "red.800" : "white"}>
                 {output ? output.map((line, i) => <div key={i}>{line}</div>) : 'Click "Run Code" to see the output here'}
               </Box>
             </Box>

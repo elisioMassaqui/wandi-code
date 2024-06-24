@@ -16,28 +16,16 @@ export const CODE_SNIPPETS = {
   java: `\npublic class HelloWorld {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println("Olá, Wandi!");\n\t}\n}\n`,
   csharp: `\nusing System;\n\npublic class Hello {\n\tpublic static void Main() {\n\t\tConsole.WriteLine("Olá, Wandi in C#!");\n\t}\n}\n`,
   php: `<?php\n\n$name = 'Wandi';\necho $name;\n`,
-  c: `// Código em C para Arduino: Explore a programação no Arduino de maneira divertida e educativa com a Causa-Efeito, SINER.\n\nvoid setup() {
-    // Inicializa a comunicação serial
-    Serial.begin(9600);
-}
+  c: `#include <stdio.h>
 
-void loop() {
-    // Imprime uma mensagem especial pela porta serial
-    Serial.println("Olá, Wandi! Bem-vindo ao universo do Arduino com a Causa-Efeito, SINER!");
-    
-    // Aguarda um momento antes da próxima aventura
-    delay(1000);
-}`,
-  cpp: `// Código em C++ para Arduino: Explore a programação no Arduino de maneira divertida e educativa com a Causa-Efeito, SINER.\n\nvoid setup() {
-    // Inicializa a comunicação serial
-    Serial.begin(9600);
-}
+  int main() {
+    printf("Olá, Wandi!\\n");
+    return 0;
+  }`,
+  cpp: `#include <iostream>
 
-void loop() {
-    // Imprime uma mensagem especial pela porta serial
-    Serial.println("Olá, Wandinho! Bem-vindo ao universo do Arduino com a Causa-Efeito, SINER!");
-    
-    // Aguarda um momento antes da próxima aventura
-    delay(1000);
+  int main() {
+    std::cout << "Olá Wandi" << std::endl;
+    return 0;  
 }`,
 };
