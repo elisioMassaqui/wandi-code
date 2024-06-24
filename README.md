@@ -52,4 +52,3 @@ npm run dev
 ```
 
 ## [Sobre Compilador online Piston API](https://github.com/elisioMassaqui/wandi-code/blob/master/sobre%20compilar%20online.md)
-![Compiler](https://github.com/elisioMassaqui/wandi-code/blob/master/piston.png)
