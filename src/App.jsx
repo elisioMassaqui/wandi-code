@@ -145,14 +145,14 @@ function App() {
           </Button>
           </Box>
 
-          <Box flex="1" bgColor="gray.800" overflowX="auto">
+          <Box flex="1" bgColor="gray.800" w={"50%"}>
           {/* Lista de Arquivos */}
           <Flex overflowX="auto" whiteSpace="nowrap">
             {files.map((file, index) => (
               <Box
                 key={index}
                 bg={LANGUAGE_COLORS[file.language] || "gray.600"}
-                p={2}
+                p={1}
                 m={2}
                 borderRadius="md"
                 _hover={{ bg: "gray.500", cursor: "pointer" }}
@@ -177,7 +177,8 @@ function App() {
 
           {/* Painel de Saída */}
           <Box
-          w={"20%"}
+            w={"30%"}
+            h={"100%"}
             bgColor={isError ? "red.100" : "gray.800"}
             overflowY="auto"
             border="1px solid"
@@ -195,11 +196,11 @@ function App() {
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Criar Novo Arquivo</ModalHeader>
+            <ModalHeader>Criar Novo Code</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <Input
-                placeholder="Nome do arquivo"
+                placeholder="Nome do code"
                 value={fileName}
                 onChange={(e) => setFileName(e.target.value)}
               />
