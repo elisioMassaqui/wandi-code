@@ -20,7 +20,7 @@ import {
   ListIcon,
 } from "@chakra-ui/react";
 import { Editor } from "@monaco-editor/react";
-import { FaPlay, FaFileAlt } from "react-icons/fa";
+import { FaPlay, FaFileAlt, FaPlus, FaPlusCircle } from "react-icons/fa";
 import axios from "axios";
 import { ChakraProvider } from "@chakra-ui/react";
 import { CODE_SNIPPETS, LANGUAGE_VERSIONS } from "./constants";
@@ -128,23 +128,22 @@ function App() {
           <Text fontFamily="cursive" fontSize="25px" color="white">
             Wandi-Code
           </Text>
-          <Button size="md" colorScheme="green" isLoading={isLoading} onClick={runCode}>
-            <FaPlay />
+          {/* Botões */}
+        <Flex p={3} minWidth='max-content' alignItems='center' gap='2' bg="blue.500">
+          {/* Botões */}
+        <Button onClick={onOpen}>
+            <FaPlusCircle/>
+          </Button>
+          <Button colorScheme="green" isLoading={isLoading} onClick={runCode}>
+            <FaPlay/>
           </Button>
         </Flex>
+      </Flex>
 
 
 
           {/* Main */}
         <Flex flex="1" direction="row" overflow="hidden">
-        
-          {/* Botão para criar novo arquivo */}
-          <Box bgColor="gray.800" w="10%" p={1}>
-          <Button colorScheme="blue" onClick={onOpen}>
-          Code
-          </Button>
-          </Box>
-
           <Box flex="1" bgColor="gray.800" w={"50%"}>
           {/* Lista de Arquivos */}
           <Flex overflowX="auto" whiteSpace="nowrap">
@@ -154,7 +153,7 @@ function App() {
                 bg={LANGUAGE_COLORS[file.language] || "gray.600"}
                 p={1}
                 m={2}
-                borderRadius="md"
+                borderRadius="3px"
                 _hover={{ bg: "gray.500", cursor: "pointer" }}
                 onClick={() => selectFile(file)}
                 display="inline-block"
