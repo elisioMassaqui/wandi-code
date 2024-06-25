@@ -194,17 +194,19 @@ function App() {
         {/* Modal para criar novo arquivo */}
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Criar Novo Code</ModalHeader>
+          <ModalContent color={"blue.700"}>
+            <ModalHeader>Criar Novo Wandi-Code</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <Input
-                placeholder="Nome do code"
+                placeholder="Nome do wandi-code"
                 value={fileName}
+                variant='filled'
                 onChange={(e) => setFileName(e.target.value)}
               />
               <Select
                 placeholder="Selecionar linguagem"
+                variant='filled'
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
                 mt={4}
