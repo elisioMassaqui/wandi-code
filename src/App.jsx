@@ -194,7 +194,7 @@ function App() {
         {/* Modal para criar novo arquivo */}
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
-          <ModalContent color={"blue.700"}>
+          <ModalContent color={"cyan"}>
             <ModalHeader>Criar Novo Wandi-Code</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
