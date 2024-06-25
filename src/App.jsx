@@ -133,65 +133,59 @@ function App() {
           </Button>
         </Flex>
 
-        <Flex flex="1" overflow="hidden">
-          {/* Sidebar */}
-          <Box width={{ base: "100px", md: "100px" }} bg="gray.900" boxShadow="0 0 10px rgba(0,0,0,0.5)">
-            {/* Botão para criar novo arquivo */}
-            <Button colorScheme="blue" onClick={onOpen}>
-              Novo Arquivo
-            </Button>
+        <Box bg="gray.900" p={3}>
+          {/* Botão para criar novo arquivo */}
+          <Button colorScheme="blue" onClick={onOpen} mb={4}>
+            Novo Arquivo
+          </Button>
+          
+          {/* Lista de Arquivos */}
+          <Flex overflowX="auto" whiteSpace="nowrap">
+            {files.map((file, index) => (
+              <Box
+                key={index}
+                bg={LANGUAGE_COLORS[file.language] || "gray.600"}
+                p={2}
+                m={1}
+                borderRadius="md"
+                _hover={{ bg: "gray.500", cursor: "pointer" }}
+                onClick={() => selectFile(file)}
+                display="inline-block"
+              >
+                <Text color="white">{file.name}</Text>
+              </Box>
+            ))}
+          </Flex>
+        </Box>
+
+        <Flex flex="1" direction="column" overflow="hidden">
+          {/* Editor */}
+          <Box flex="1" bgColor="gray.800">
+            <Editor
+              theme="vs-dark"
+              language={language}
+              defaultValue={value}
+              onMount={(editor) => (editorRef.current = editor)}
+              value={value}
+              onChange={setValue}
+              options={{ minimap: { enabled: false } }}
+            />
           </Box>
 
-          <Flex flex="1" direction={{ base: "column", md: "row" }} bgColor="gray.800">
-            {/* Lista de Arquivos */}
-            <Box width={{ base: "100%", md: "25%" }} bgColor="gray.700" p={2} overflowY="auto">
-              <Text fontSize="lg" color="white" mb={2}>Arquivos</Text>
-              <List spacing={2}>
-                {files.map((file, index) => (
-                  <ListItem
-                    key={index}
-                    bg={LANGUAGE_COLORS[file.language] || "gray.600"}
-                    p={2}
-                    borderRadius="md"
-                    _hover={{ bg: "gray.500", cursor: "pointer" }}
-                    onClick={() => selectFile(file)}
-                  >
-                    <ListIcon as={FaFileAlt} color="white" />
-                    <Text color="white" display="inline">{file.name}</Text>
-                  </ListItem>
-                ))}
-              </List>
-            </Box>
-
-            {/* Editor */}
-            <Box flex="1" width={{ base: "95%", md: "75%" }} height={{ base: "50%", md: "100%" }} bgColor="gray.800">
-              <Editor
-                theme="vs-dark"
-                language={language}
-                defaultValue={value}
-                onMount={(editor) => (editorRef.current = editor)}
-                value={value}
-                onChange={setValue}
-                options={{ minimap: { enabled: false } }}
-              />
-            </Box>
-
-            {/* Painel de Saída */}
-            <Box
-              width={{ base: "95%", md: "25%" }}
-              height={{ base: "20%", md: "100%" }}
-              bgColor={isError ? "red.100" : "gray.800"}
-              overflowY="auto"
-              border="1px solid"
-              borderRadius="1"
-              borderColor={isError ? "red.500" : "#333"}
-              p={2}
-              fontSize="sm"
-              color={isError ? "red.800" : "white"}
-            >
-              {output ? output.map((line, i) => <div key={i}>{line}</div>) : 'Clique em "Executar Código" para ver a saída aqui'}
-            </Box>
-          </Flex>
+          {/* Painel de Saída */}
+          <Box
+            bgColor={isError ? "red.100" : "gray.800"}
+            overflowY="auto"
+            border="1px solid"
+            borderRadius="1"
+            borderColor={isError ? "red.500" : "#333"}
+            p={2}
+            fontSize="sm"
+            color={isError ? "red.800" : "white"}
+            height="200px"
+          >
+            {output ? output.map((line, i) => <div key={i}>{line}</div>) : 'Clique em "Executar Código" para ver a saída aqui'}
+          </Box>
         </Flex>
 
         {/* Modal para criar novo arquivo */}
