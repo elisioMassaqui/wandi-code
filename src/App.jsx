@@ -1,7 +1,26 @@
 import React, { useRef, useState } from "react";
-import { Box, Flex, Text, Button, useToast, Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  Button,
+  useToast,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Input,
+  Select,
+  useDisclosure,
+  List,
+  ListItem,
+  ListIcon,
+} from "@chakra-ui/react";
 import { Editor } from "@monaco-editor/react";
-import { FaPlay } from "react-icons/fa";
+import { FaPlay, FaFileAlt } from "react-icons/fa";
 import axios from "axios";
 import { ChakraProvider } from "@chakra-ui/react";
 import { CODE_SNIPPETS, LANGUAGE_VERSIONS } from "./constants";
@@ -12,14 +31,29 @@ const API = axios.create({
 
 const ACTIVE_COLOR = "cyan.400";
 
+// Mapeamento de cores para cada linguagem
+const LANGUAGE_COLORS = {
+  python: "blue.300",
+  javascript: "yellow.300",
+  java: "red.300",
+  c: "green.300",
+  cpp: "orange.300",
+  go: "teal.300",
+  ruby: "purple.300",
+  // Adicione outras linguagens e cores conforme necessário
+};
+
 function App() {
   const editorRef = useRef();
   const toast = useToast();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [value, setValue] = useState(CODE_SNIPPETS.python);
   const [language, setLanguage] = useState("python");
+  const [fileName, setFileName] = useState("");
   const [output, setOutput] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [files, setFiles] = useState([]);
 
   const executeCode = async (language, sourceCode) => {
     try {
@@ -38,9 +72,30 @@ function App() {
     }
   };
 
-  const onSelectLanguage = async (selectedLanguage) => {
-    setLanguage(selectedLanguage);
-    setValue(CODE_SNIPPETS[selectedLanguage]);
+  const createNewFile = () => {
+    if (!fileName || !language) {
+      toast({
+        title: "Nome do arquivo e linguagem são obrigatórios.",
+        status: "error",
+        duration: 3000,
+      });
+      return;
+    }
+    const newFile = { name: fileName, language: language, content: CODE_SNIPPETS[language] };
+    setFiles([...files, newFile]);
+    setFileName("");
+    setLanguage("python");
+    onClose();
+  };
+
+  const selectFile = (file) => {
+    setValue(file.content);
+    setLanguage(file.language);
+    toast({
+      title: `Arquivo ${file.name} selecionado.`,
+      status: "info",
+      duration: 2000,
+    });
   };
 
   const runCode = async () => {
@@ -55,8 +110,8 @@ function App() {
     } catch (error) {
       console.error(error);
       toast({
-        title: "An error occurred.",
-        description: error.message || "Unable to run code",
+        title: "Ocorreu um erro.",
+        description: error.message || "Não foi possível executar o código",
         status: "error",
         duration: 6000,
       });
@@ -68,7 +123,7 @@ function App() {
   return (
     <ChakraProvider>
       <Flex flexDirection="column" height="100vh">
-        {/* Top Bar */}
+        {/* Barra Superior */}
         <Flex p={3} bg="blue.500" alignItems="center" justifyContent="space-between">
           <Text fontFamily="cursive" fontSize="25px" color="white">
             Wandi-Code
@@ -77,37 +132,39 @@ function App() {
             <FaPlay />
           </Button>
         </Flex>
-        
+
         <Flex flex="1" overflow="hidden">
           {/* Sidebar */}
           <Box width={{ base: "100px", md: "100px" }} bg="gray.900" boxShadow="0 0 10px rgba(0,0,0,0.5)">
-            {/* Language Selector */}
-            <Menu isLazy>
-              <MenuButton as={Button} color="white" bg="blue.800" _hover={{ bg: "blue.700" }} _active={{ bg: "blue.700" }}>
-                {language}
-              </MenuButton>
-              <MenuList bg="blue.700">
-                {Object.entries(LANGUAGE_VERSIONS).map(([lang, version]) => (
-                  <MenuItem
-                    key={lang}
-                    color={lang === language ? ACTIVE_COLOR : ""}
-                    bg={lang === language ? "gray.900" : "transparent"}
-                    _hover={{ color: "cyan.400", bg: "cyan.700" }}
-                    onClick={() => onSelectLanguage(lang)}
-                  >
-                    {lang}&nbsp;
-                    <Text as="span" color="white" fontSize="sm">
-                      {version}
-                    </Text>
-                  </MenuItem>
-                ))}
-              </MenuList>
-            </Menu>
+            {/* Botão para criar novo arquivo */}
+            <Button colorScheme="blue" onClick={onOpen}>
+              Novo Arquivo
+            </Button>
           </Box>
 
           <Flex flex="1" direction={{ base: "column", md: "row" }} bgColor="gray.800">
+            {/* Lista de Arquivos */}
+            <Box width={{ base: "100%", md: "25%" }} bgColor="gray.700" p={2} overflowY="auto">
+              <Text fontSize="lg" color="white" mb={2}>Arquivos</Text>
+              <List spacing={2}>
+                {files.map((file, index) => (
+                  <ListItem
+                    key={index}
+                    bg={LANGUAGE_COLORS[file.language] || "gray.600"}
+                    p={2}
+                    borderRadius="md"
+                    _hover={{ bg: "gray.500", cursor: "pointer" }}
+                    onClick={() => selectFile(file)}
+                  >
+                    <ListIcon as={FaFileAlt} color="white" />
+                    <Text color="white" display="inline">{file.name}</Text>
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
+
             {/* Editor */}
-            <Box flex="1" width={{ base: "95%", md: "50%" }} height={{ base: "50%", md: "100%" }} bgColor="gray.800">
+            <Box flex="1" width={{ base: "95%", md: "75%" }} height={{ base: "50%", md: "100%" }} bgColor="gray.800">
               <Editor
                 theme="vs-dark"
                 language={language}
@@ -119,7 +176,7 @@ function App() {
               />
             </Box>
 
-            {/* Output Panel */}
+            {/* Painel de Saída */}
             <Box
               width={{ base: "95%", md: "25%" }}
               height={{ base: "20%", md: "100%" }}
@@ -132,15 +189,52 @@ function App() {
               fontSize="sm"
               color={isError ? "red.800" : "white"}
             >
-              {output ? output.map((line, i) => <div key={i}>{line}</div>) : 'Click "Run Code" to see the output here'}
+              {output ? output.map((line, i) => <div key={i}>{line}</div>) : 'Clique em "Executar Código" para ver a saída aqui'}
             </Box>
           </Flex>
         </Flex>
 
-        {/* Footer */}
+        {/* Modal para criar novo arquivo */}
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Criar Novo Arquivo</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Input
+                placeholder="Nome do arquivo"
+                value={fileName}
+                onChange={(e) => setFileName(e.target.value)}
+              />
+              <Select
+                placeholder="Selecionar linguagem"
+                value={language}
+                onChange={(e) => setLanguage(e.target.value)}
+                mt={4}
+              >
+                {Object.entries(LANGUAGE_VERSIONS).map(([lang, version]) => (
+                  <option key={lang} value={lang}>
+                    {lang}
+                  </option>
+                ))}
+              </Select>
+            </ModalBody>
+
+            <ModalFooter>
+              <Button colorScheme="blue" mr={3} onClick={createNewFile}>
+                Criar
+              </Button>
+              <Button variant="ghost" onClick={onClose}>
+                Cancelar
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+
+        {/* Rodapé */}
         <Box as="footer" p="1.5" bg="blue.900" textAlign="center">
           <Text fontSize="sm" color="white">
-            &copy; {new Date().getFullYear()} Wandi Code. All rights reserved.
+            &copy; {new Date().getFullYear()} Wandi Code. Todos os direitos reservados.
           </Text>
         </Box>
       </Flex>
