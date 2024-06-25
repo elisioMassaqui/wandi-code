@@ -133,12 +133,19 @@ function App() {
           </Button>
         </Flex>
 
-        <Box bg="gray.900" p={3}>
+
+
+          {/* Main */}
+        <Flex flex="1" direction="row" overflow="hidden">
+        
           {/* Botão para criar novo arquivo */}
-          <Button colorScheme="blue" onClick={onOpen} mb={4}>
-            Novo Arquivo
+          <Box bgColor="gray.800" w="10%" p={1}>
+          <Button colorScheme="blue" onClick={onOpen}>
+          Code
           </Button>
-          
+          </Box>
+
+          <Box flex="1" bgColor="gray.800" overflowX="auto">
           {/* Lista de Arquivos */}
           <Flex overflowX="auto" whiteSpace="nowrap">
             {files.map((file, index) => (
@@ -146,7 +153,7 @@ function App() {
                 key={index}
                 bg={LANGUAGE_COLORS[file.language] || "gray.600"}
                 p={2}
-                m={1}
+                m={2}
                 borderRadius="md"
                 _hover={{ bg: "gray.500", cursor: "pointer" }}
                 onClick={() => selectFile(file)}
@@ -156,11 +163,7 @@ function App() {
               </Box>
             ))}
           </Flex>
-        </Box>
-
-        <Flex flex="1" direction="column" overflow="hidden">
-          {/* Editor */}
-          <Box flex="1" bgColor="gray.800">
+        {/* Editor */}
             <Editor
               theme="vs-dark"
               language={language}
@@ -174,6 +177,7 @@ function App() {
 
           {/* Painel de Saída */}
           <Box
+          w={"20%"}
             bgColor={isError ? "red.100" : "gray.800"}
             overflowY="auto"
             border="1px solid"
@@ -182,7 +186,6 @@ function App() {
             p={2}
             fontSize="sm"
             color={isError ? "red.800" : "white"}
-            height="200px"
           >
             {output ? output.map((line, i) => <div key={i}>{line}</div>) : 'Clique em "Executar Código" para ver a saída aqui'}
           </Box>
