@@ -24,6 +24,7 @@ import { FaPlay, FaFileAlt, FaPlus, FaPlusCircle } from "react-icons/fa";
 import axios from "axios";
 import { ChakraProvider } from "@chakra-ui/react";
 import { CODE_SNIPPETS, LANGUAGE_VERSIONS } from "./constants";
+import { CODE_SNIPPETS_ARDUINO, LANGUAGE_VERSIONS_ARDUINO } from "./arduino";
 
 const API = axios.create({
   baseURL: "https://emkc.org/api/v2/piston",
@@ -59,7 +60,7 @@ function App() {
     try {
       const response = await API.post("/execute", {
         language: language,
-        version: LANGUAGE_VERSIONS[language],
+        version: LANGUAGE_VERSIONS_ARDUINO[language],
         files: [
           {
             content: sourceCode,
@@ -81,7 +82,7 @@ function App() {
       });
       return;
     }
-    const newFile = { name: fileName, language: language, content: CODE_SNIPPETS[language] };
+    const newFile = { name: fileName, language: language, content: CODE_SNIPPETS_ARDUINO[language] };
     setFiles([...files, newFile]);
     setFileName("");
     setLanguage("python");
@@ -211,7 +212,7 @@ function App() {
                 onChange={(e) => setLanguage(e.target.value)}
                 mt={4}
               >
-                {Object.entries(LANGUAGE_VERSIONS).map(([lang, version]) => (
+                {Object.entries(LANGUAGE_VERSIONS_ARDUINO).map(([lang, version]) => (
                   <option key={lang} value={lang}>
                     {lang}
                   </option>
