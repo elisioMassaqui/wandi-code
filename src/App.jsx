@@ -15,12 +15,9 @@ import {
   Input,
   Select,
   useDisclosure,
-  List,
-  ListItem,
-  ListIcon,
 } from "@chakra-ui/react";
 import { Editor } from "@monaco-editor/react";
-import { FaPlay, FaFileAlt, FaPlus, FaPlusCircle } from "react-icons/fa";
+import { FaPlay, FaPlusCircle, FaDownload } from "react-icons/fa"; // Adicionei FaDownload para o ícone de download
 import axios from "axios";
 import { ChakraProvider } from "@chakra-ui/react";
 import { CODE_SNIPPETS, LANGUAGE_VERSIONS } from "./constants";
@@ -35,12 +32,8 @@ const ACTIVE_COLOR = "cyan.400";
 // Mapeamento de cores para cada linguagem
 const LANGUAGE_COLORS = {
   python: "blue.300",
-  javascript: "yellow.300",
-  java: "red.300",
   c: "green.300",
   cpp: "orange.300",
-  go: "teal.300",
-  ruby: "purple.300",
   // Adicione outras linguagens e cores conforme necessário
 };
 
@@ -48,7 +41,7 @@ function App() {
   const editorRef = useRef();
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [value, setValue] = useState(CODE_SNIPPETS.python);
+  const [value, setValue] = useState(CODE_SNIPPETS_ARDUINO.python);
   const [language, setLanguage] = useState("python");
   const [fileName, setFileName] = useState("");
   const [output, setOutput] = useState(null);
@@ -85,7 +78,7 @@ function App() {
     const newFile = { name: fileName, language: language, content: CODE_SNIPPETS_ARDUINO[language] };
     setFiles([...files, newFile]);
     setFileName("");
-    setLanguage("python");
+    setLanguage("c");
     onClose();
   };
 
@@ -121,6 +114,16 @@ function App() {
     }
   };
 
+  const downloadFile = (file) => {
+    const element = document.createElement("a");
+    const fileContent = new Blob([file.content], { type: "cpp" });
+    element.href = URL.createObjectURL(fileContent);
+    element.download = file.name + ".ino"; // Nome do arquivo para download (pode ser dinâmico)
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+    document.body.removeChild(element);
+  };
+
   return (
     <ChakraProvider>
       <Flex flexDirection="column" height="100vh">
@@ -130,40 +133,41 @@ function App() {
             Wandi-Code
           </Text>
           {/* Botões */}
-        <Flex p={3} minWidth='max-content' alignItems='center' gap='2' bg="blue.500">
-          {/* Botões */}
-        <Button onClick={onOpen}>
-            <FaPlusCircle/>
-          </Button>
-          <Button colorScheme="green" isLoading={isLoading} onClick={runCode}>
-            <FaPlay/>
-          </Button>
+          <Flex p={3} minWidth="max-content" alignItems="center" gap="2" bg="blue.500">
+            {/* Botões */}
+            <Button onClick={onOpen}>
+              <FaPlusCircle />
+            </Button>
+            <Button colorScheme="green" isLoading={isLoading} onClick={runCode}>
+              <FaPlay />
+            </Button>
+          </Flex>
         </Flex>
-      </Flex>
 
-
-
-          {/* Main */}
+        {/* Main */}
         <Flex flex="1" direction="row" overflow="hidden">
           <Box flex="1" bgColor="gray.800" w={"50%"}>
-          {/* Lista de Arquivos */}
-          <Flex overflowX="auto" whiteSpace="nowrap">
-            {files.map((file, index) => (
-              <Box
-                key={index}
-                bg={LANGUAGE_COLORS[file.language] || "gray.600"}
-                p={1}
-                m={2}
-                borderRadius="3px"
-                _hover={{ bg: "gray.500", cursor: "pointer" }}
-                onClick={() => selectFile(file)}
-                display="inline-block"
-              >
-                <Text color="white">{file.name}</Text>
-              </Box>
-            ))}
-          </Flex>
-        {/* Editor */}
+            {/* Lista de Arquivos */}
+            <Flex overflowX="auto" whiteSpace="nowrap">
+              {files.map((file, index) => (
+                <Box
+                  key={index}
+                  bg={LANGUAGE_COLORS[file.language] || "gray.600"}
+                  p={1}
+                  m={2}
+                  borderRadius="3px"
+                  _hover={{ bg: "gray.500", cursor: "pointer" }}
+                  onClick={() => selectFile(file)}
+                  display="inline-block"
+                >
+                  <Text color="white">{file.name}</Text>
+                  <Button variant="ghost" size="xs" onClick={() => downloadFile(file)}>
+                    <FaDownload />
+                  </Button>
+                </Box>
+              ))}
+            </Flex>
+            {/* Editor */}
             <Editor
               theme="vs-dark"
               language={language}
@@ -195,19 +199,19 @@ function App() {
         {/* Modal para criar novo arquivo */}
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
-          <ModalContent color={"cyan"}>
+          <ModalContent color={"black"}>
             <ModalHeader>Criar Novo Wandi-Code</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <Input
                 placeholder="Nome do wandi-code"
                 value={fileName}
-                variant='filled'
+                variant="filled"
                 onChange={(e) => setFileName(e.target.value)}
               />
               <Select
                 placeholder="Selecionar linguagem"
-                variant='filled'
+                variant="filled"
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
                 mt={4}
